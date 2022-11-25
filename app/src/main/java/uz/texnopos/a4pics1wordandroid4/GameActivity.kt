@@ -3,10 +3,15 @@ package uz.texnopos.a4pics1wordandroid4
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.Gravity
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import uz.texnopos.a4pics1wordandroid4.data.Constants
 import uz.texnopos.a4pics1wordandroid4.data.Question
 import uz.texnopos.a4pics1wordandroid4.databinding.ActivityGameBinding
@@ -16,9 +21,10 @@ class GameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGameBinding
     private lateinit var questions: List<Question>
     private var currentQuestionId = -1
+    var clickedImageId = -1
     private val optionLetters = mutableListOf<TextView>()
     private val answerLetters = mutableListOf<TextView>()
-    private val currentAnswers = mutableListOf<Pair<Int, String>>()
+    private val currentAnswers = mutableListOf<Pair<String, TextView>>()
     private val currentOptions = mutableListOf<Char>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +48,22 @@ class GameActivity : AppCompatActivity() {
                     tvAnswer5, tvAnswer6, tvAnswer7, tvAnswer8
                 )
             )
+        }
+
+
+
+        optionLetters.forEach { optionTV ->
+            optionTV.addTextChangedListener {
+                val letter = it.toString()
+                optionTV.isEnabled = letter.isNotEmpty()
+            }
+        }
+
+        answerLetters.forEach { answerTV ->
+            answerTV.addTextChangedListener {
+                val letter = it.toString()
+                answerTV.isEnabled = letter.isNotEmpty()
+            }
         }
 
         currentQuestionId++
@@ -69,6 +91,46 @@ class GameActivity : AppCompatActivity() {
             tvAnswer6.setOnClickListener { answerClick(it as TextView) }
             tvAnswer7.setOnClickListener { answerClick(it as TextView) }
             tvAnswer8.setOnClickListener { answerClick(it as TextView) }
+
+            btnNext.setOnClickListener {
+                currentQuestionId++
+                setQuestion()
+            }
+
+            btnBack.setOnClickListener {
+                finish()
+            }
+
+            ivPic1.setOnClickListener {
+                clickedImageId = 0
+                bigImage.setImageResource(questions[currentQuestionId].images[0])
+                bigImage.visibility = View.VISIBLE
+                bigImage.startAnimation(
+                    AnimationUtils.loadAnimation(
+                        this@GameActivity,R.anim.animation_up_one
+                    )
+                )
+            }
+
+            ivShine.startAnimation(
+                AnimationUtils.loadAnimation(
+                    this@GameActivity,R.anim.rotate_anim
+                )
+            )
+
+
+            bigImage.setOnClickListener {
+                when(clickedImageId){
+                    0-> {
+                        bigImage.startAnimation(AnimationUtils.loadAnimation(
+                            this@GameActivity,R.anim.animation_down_one
+                        ))
+                        Handler().postDelayed({
+                            bigImage.visibility = View.GONE
+                        },200L)
+                    }
+                }
+            }
         }
     }
 
@@ -78,7 +140,7 @@ class GameActivity : AppCompatActivity() {
 
         binding.apply {
             currentAnswers.clear()
-            updateAnswer()
+            updateAnswer(currentQuestion)
             showContinue(false)
 
             tvLevel.text = (currentQuestionId + 1).toString()
@@ -103,6 +165,7 @@ class GameActivity : AppCompatActivity() {
 
             answerLetters.forEach {
                 it.isVisible = true
+                it.isClickable = true
             }
 
             for (i in currentQuestion.answer.length until answerLetters.size) {
@@ -117,6 +180,10 @@ class GameActivity : AppCompatActivity() {
             ivShine.isVisible = show
             btnNext.isVisible = show
             tvNext.isVisible = show
+
+            answerLetters.forEach {
+                it.isClickable = false
+            }
         }
     }
 
@@ -126,19 +193,14 @@ class GameActivity : AppCompatActivity() {
         val index = optionLetters.indexOf(optionTV)
         val letter = currentOptions[index]
 
-        currentAnswers.add(Pair(index, letter.toString()))
-        updateAnswer()
-        optionTV.text = ""
-
-        if (currentQuestion.answer.length == currentAnswers.size) {
-            if (currentQuestion.answer == currentAnswers.map { it.second }.joinToString("")) {
-                showContinue(true)
-            } else {
-                optionLetters.forEach { option ->
-                    option.isClickable = false
-                }
-            }
+        val pairIndex = currentAnswers.indexOfFirst { it.first == "" }
+        if (pairIndex == -1) {
+            currentAnswers.add(Pair(letter.toString(), optionTV))
+        } else {
+            currentAnswers[pairIndex] = Pair(letter.toString(), optionTV)
         }
+        updateAnswer(currentQuestion)
+        optionTV.text = ""
     }
 
     private fun answerClick(answerTV: TextView) {
@@ -146,13 +208,37 @@ class GameActivity : AppCompatActivity() {
         val index = answerLetters.indexOf(answerTV)
         val pair = currentAnswers[index]
 
-        optionLetters[pair.first].text = pair.second
-        currentAnswers.removeAt(index)
+        pair.second.text = pair.first
+        currentAnswers[index] = Pair("", pair.second)
+        updateAnswer(questions[currentQuestionId])
     }
 
-    private fun updateAnswer() {
+    private fun updateAnswer(question: Question) {
+        if (currentAnswers.isEmpty()) {
+            answerLetters.forEach {
+                it.text = ""
+            }
+            optionLetters.forEach { option ->
+                option.isClickable = true
+            }
+            return
+        }
+
         currentAnswers.forEachIndexed { index, letter ->
-            answerLetters[index].text = letter.second
+            answerLetters[index].text = letter.first
+        }
+
+        if (question.answer.length == currentAnswers.filter { it.first.isNotEmpty() }.size) {
+            if (question.answer == currentAnswers.map { it.first }.joinToString("")) {
+                showContinue(true)
+            }
+            optionLetters.forEach { option ->
+                option.isClickable = false
+            }
+        } else {
+            optionLetters.forEach { option ->
+                option.isClickable = true
+            }
         }
     }
 }

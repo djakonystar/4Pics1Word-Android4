@@ -26,36 +26,36 @@
         android:id="@+id/btn_back"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@drawable/ic_back_24"
-        app:layout_constraintTop_toTopOf="@id/toolbar_bg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/toolbar_bg"
         android:layout_marginStart="16dp"
+        android:src="@drawable/ic_back_24"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar_bg"
         app:tint="@color/white" />
 
     <ImageView
         android:id="@+id/iv_level"
         android:layout_width="96dp"
         android:layout_height="96dp"
-        android:src="@drawable/ic_level"
         android:layout_marginTop="4dp"
-        app:layout_constraintTop_toTopOf="@id/toolbar_guideline"
+        android:src="@drawable/ic_level"
         app:layout_constraintBottom_toBottomOf="@id/toolbar_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/toolbar_guideline" />
 
     <TextView
         android:id="@+id/tv_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/iv_level"
-        app:layout_constraintBottom_toBottomOf="@id/iv_level"
-        app:layout_constraintStart_toStartOf="@id/iv_level"
-        app:layout_constraintEnd_toEndOf="@id/iv_level"
         android:text="1"
         android:textColor="@color/white"
         android:textSize="32dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/iv_level"
+        app:layout_constraintEnd_toEndOf="@id/iv_level"
+        app:layout_constraintStart_toStartOf="@id/iv_level"
+        app:layout_constraintTop_toTopOf="@id/iv_level"
         tools:ignore="SpUsage" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -65,140 +65,152 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
+
+    <ImageView
+        android:id="@+id/big_image"
+        android:layout_width="0dp"
+        android:visibility="gone"
+        android:elevation="1dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_pic_4"
+        app:layout_constraintEnd_toEndOf="@id/iv_pic_2"
+        app:layout_constraintStart_toStartOf="@id/iv_pic_1"
+        app:layout_constraintTop_toTopOf="@id/iv_pic_1" />
+
     <ImageView
         android:id="@+id/iv_pic_1"
         android:layout_width="160dp"
         android:layout_height="160dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
         android:src="@drawable/photo1_1"
         app:layout_constraintEnd_toEndOf="@id/guideline_images"
-        app:layout_constraintTop_toBottomOf="@id/iv_level"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="4dp"/>
+        app:layout_constraintTop_toBottomOf="@id/iv_level" />
 
     <ImageView
         android:id="@+id/iv_pic_2"
         android:layout_width="160dp"
         android:layout_height="160dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/photo1_2"
         app:layout_constraintStart_toStartOf="@id/guideline_images"
-        app:layout_constraintTop_toBottomOf="@id/iv_level"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="4dp"/>
+        app:layout_constraintTop_toBottomOf="@id/iv_level" />
 
     <ImageView
         android:id="@+id/iv_pic_3"
         android:layout_width="160dp"
         android:layout_height="160dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:src="@drawable/photo1_3"
         app:layout_constraintEnd_toEndOf="@id/guideline_images"
-        app:layout_constraintTop_toBottomOf="@id/iv_pic_1"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"/>
+        app:layout_constraintTop_toBottomOf="@id/iv_pic_1" />
 
     <ImageView
         android:id="@+id/iv_pic_4"
         android:layout_width="160dp"
         android:layout_height="160dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/photo1_4"
         app:layout_constraintStart_toStartOf="@id/guideline_images"
-        app:layout_constraintTop_toBottomOf="@id/iv_pic_2"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="4dp"/>
+        app:layout_constraintTop_toBottomOf="@id/iv_pic_2" />
 
     <LinearLayout
         android:id="@+id/ll_letters"
         android:layout_width="match_parent"
         android:layout_height="96dp"
-        android:weightSum="2"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginHorizontal="56dp"
         android:layout_marginBottom="24dp"
-        android:layout_marginHorizontal="56dp">
+        android:orientation="vertical"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:weightSum="6"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="6">
 
             <TextView
                 android:id="@+id/tv_option_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_option_bg"
-                android:layout_weight="1"
-                android:text="A"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_option_bg"
+                android:text="A"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="32dp"
-                android:textStyle="bold"
-                android:textAlignment="center" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_option_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_option_bg"
-                android:layout_weight="1"
-                android:text="A"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_option_bg"
+                android:text="A"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="32dp"
-                android:textStyle="bold"
-                android:textAlignment="center" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_option_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_option_bg"
-                android:layout_weight="1"
-                android:text="A"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_option_bg"
+                android:text="A"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="32dp"
-                android:textStyle="bold"
-                android:textAlignment="center" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_option_4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_option_bg"
-                android:layout_weight="1"
-                android:text="A"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_option_bg"
+                android:text="A"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="32dp"
-                android:textStyle="bold"
-                android:textAlignment="center" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_option_5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_option_bg"
-                android:layout_weight="1"
-                android:text="A"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_option_bg"
+                android:text="A"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="32dp"
-                android:textStyle="bold"
-                android:textAlignment="center" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_option_6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_option_bg"
-                android:layout_weight="1"
-                android:text="A"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_option_bg"
+                android:text="A"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="32dp"
-                android:textStyle="bold"
-                android:textAlignment="center" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -206,86 +218,86 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:weightSum="6"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="6">
 
             <TextView
                 android:id="@+id/tv_option_7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_option_bg"
-                android:layout_weight="1"
-                android:text="A"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_option_bg"
+                android:text="A"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="32dp"
-                android:textStyle="bold"
-                android:textAlignment="center" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_option_8"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_option_bg"
-                android:layout_weight="1"
-                android:text="A"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_option_bg"
+                android:text="A"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="32dp"
-                android:textStyle="bold"
-                android:textAlignment="center" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_option_9"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_option_bg"
-                android:layout_weight="1"
-                android:text="A"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_option_bg"
+                android:text="A"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="32dp"
-                android:textStyle="bold"
-                android:textAlignment="center" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_option_10"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_option_bg"
-                android:layout_weight="1"
-                android:text="A"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_option_bg"
+                android:text="A"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="32dp"
-                android:textStyle="bold"
-                android:textAlignment="center" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_option_11"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_option_bg"
-                android:layout_weight="1"
-                android:text="A"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_option_bg"
+                android:text="A"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="32dp"
-                android:textStyle="bold"
-                android:textAlignment="center" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_option_12"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_option_bg"
-                android:layout_weight="1"
-                android:text="A"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_option_bg"
+                android:text="A"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="32dp"
-                android:textStyle="bold"
-                android:textAlignment="center" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -299,118 +311,120 @@
 
     <ImageView
         android:id="@+id/iv_shine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/success_ray_blue"
-        app:layout_constraintTop_toTopOf="@id/ll_answers"
-        app:layout_constraintBottom_toBottomOf="@id/ll_answers" />
+        app:layout_constraintBottom_toBottomOf="@id/ll_answers"
+        app:layout_constraintTop_toTopOf="@id/ll_answers" />
 
     <LinearLayout
         android:id="@+id/ll_answers"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
+        android:weightSum="8"
         app:layout_constraintBottom_toTopOf="@id/ll_letters"
-        app:layout_constraintTop_toBottomOf="@id/iv_pic_4"
-        android:layout_marginHorizontal="16dp"
-        android:weightSum="8">
+        app:layout_constraintTop_toBottomOf="@id/iv_pic_4">
 
         <TextView
             android:id="@+id/tv_answer_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_answer_bg"
-            android:layout_weight="1"
             android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_answer_bg"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="32dp"
-            android:textStyle="bold"
-            android:textAlignment="center" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_answer_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_answer_bg"
-            android:layout_weight="1"
             android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_answer_bg"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="32dp"
-            android:textStyle="bold"
-            android:textAlignment="center" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_answer_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_answer_bg"
-            android:layout_weight="1"
             android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_answer_bg"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="32dp"
-            android:textStyle="bold"
-            android:textAlignment="center" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_answer_4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_answer_bg"
-            android:layout_weight="1"
             android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_answer_bg"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="32dp"
-            android:textStyle="bold"
-            android:textAlignment="center" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_answer_5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_answer_bg"
-            android:layout_weight="1"
             android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_answer_bg"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="32dp"
-            android:textStyle="bold"
-            android:textAlignment="center" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_answer_6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_answer_bg"
-            android:layout_weight="1"
             android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_answer_bg"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="32dp"
-            android:textStyle="bold"
-            android:textAlignment="center" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_answer_7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_answer_bg"
-            android:layout_weight="1"
             android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_answer_bg"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="32dp"
-            android:textStyle="bold"
-            android:textAlignment="center" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_answer_8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_answer_bg"
-            android:layout_weight="1"
             android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_answer_bg"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="32dp"
-            android:textStyle="bold"
-            android:textAlignment="center" />
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -419,23 +433,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/play_btn_bg"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_answers"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_answers" />
 
     <TextView
         android:id="@+id/tv_next"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/btn_next"
-        app:layout_constraintEnd_toEndOf="@id/btn_next"
-        app:layout_constraintTop_toTopOf="@id/btn_next"
-        app:layout_constraintBottom_toBottomOf="@id/btn_next"
         android:text="Continue"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="36dp"
         android:textStyle="bold"
-        android:textColor="@color/white"
-        android:textAlignment="center" />
+        app:layout_constraintBottom_toBottomOf="@id/btn_next"
+        app:layout_constraintEnd_toEndOf="@id/btn_next"
+        app:layout_constraintStart_toStartOf="@id/btn_next"
+        app:layout_constraintTop_toTopOf="@id/btn_next" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
