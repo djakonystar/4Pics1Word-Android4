@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.View
 import android.view.animation.Animation
@@ -21,10 +22,18 @@ class GameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGameBinding
     private lateinit var questions: List<Question>
     private var currentQuestionId = -1
-    var clickedImageId = -1
+    private var clickedImageId = -1
     private val optionLetters = mutableListOf<TextView>()
     private val answerLetters = mutableListOf<TextView>()
+
+    /**
+     * Paydalanıwshı terip atırǵan háripler
+     */
     private val currentAnswers = mutableListOf<Pair<String, TextView>>()
+
+    /**
+     * Variantta berilgen 12 hárip
+     */
     private val currentOptions = mutableListOf<Char>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,20 +113,24 @@ class GameActivity : AppCompatActivity() {
             ivPic1.setOnClickListener {
                 clickedImageId = 0
                 bigImage.setImageResource(questions[currentQuestionId].images[0])
-                bigImage.visibility = View.VISIBLE
+                bigImage.isVisible = true
                 bigImage.startAnimation(
                     AnimationUtils.loadAnimation(
-                        this@GameActivity,R.anim.animation_up_one
+                        this@GameActivity, R.anim.animation_up_one
                     )
                 )
             }
 
-            ivShine.startAnimation(
-                AnimationUtils.loadAnimation(
-                    this@GameActivity,R.anim.rotate_anim
+            ivPic2.setOnClickListener {
+                clickedImageId = 1
+                bigImage.setImageResource(questions[currentQuestionId].images[1])
+                bigImage.isVisible = true
+                bigImage.startAnimation(
+                    AnimationUtils.loadAnimation(
+                        this@GameActivity, R.anim.animation_up_two
+                    )
                 )
-            )
-
+            }
 
             bigImage.setOnClickListener {
                 when(clickedImageId){
@@ -125,11 +138,18 @@ class GameActivity : AppCompatActivity() {
                         bigImage.startAnimation(AnimationUtils.loadAnimation(
                             this@GameActivity,R.anim.animation_down_one
                         ))
-                        Handler().postDelayed({
-                            bigImage.visibility = View.GONE
-                        },200L)
+                    }
+                    1 -> {
+                        bigImage.startAnimation(
+                            AnimationUtils.loadAnimation(
+                                this@GameActivity, R.anim.animation_down_two
+                            )
+                        )
                     }
                 }
+                Handler(Looper.myLooper()!!).postDelayed({
+                    bigImage.isVisible = false
+                }, 200L)
             }
         }
     }
@@ -181,6 +201,16 @@ class GameActivity : AppCompatActivity() {
             btnNext.isVisible = show
             tvNext.isVisible = show
 
+            ivShine.startAnimation(
+                AnimationUtils.loadAnimation(
+                    this@GameActivity,R.anim.rotate_anim
+                )
+            )
+
+            if (!show) {
+                ivShine.clearAnimation()
+            }
+
             answerLetters.forEach {
                 it.isClickable = false
             }
@@ -224,8 +254,8 @@ class GameActivity : AppCompatActivity() {
             return
         }
 
-        currentAnswers.forEachIndexed { index, letter ->
-            answerLetters[index].text = letter.first
+        currentAnswers.forEachIndexed { index, pair ->
+            answerLetters[index].text = pair.first
         }
 
         if (question.answer.length == currentAnswers.filter { it.first.isNotEmpty() }.size) {
