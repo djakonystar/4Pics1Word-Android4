@@ -25,6 +25,7 @@
             android:weightSum="2">
 
             <ImageView
+                android:id="@+id/iv_pic_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -32,6 +33,7 @@
                 android:src="@drawable/photo1_1" />
 
             <ImageView
+                android:id="@+id/iv_pic_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -48,6 +50,7 @@
             android:weightSum="2">
 
             <ImageView
+                android:id="@+id/iv_pic_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -55,6 +58,7 @@
                 android:src="@drawable/photo1_3" />
 
             <ImageView
+                android:id="@+id/iv_pic_4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

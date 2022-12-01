@@ -3,6 +3,10 @@ package uz.texnopos.a4pics1wordandroid4.data
 import uz.texnopos.a4pics1wordandroid4.R
 
 object Constants {
+    const val PREFS = "fourPicsOneWordPrefs"
+    const val LEVEL = "currentLevel"
+    const val CYCLE = "levelCycle"
+
     fun getQuestions(): List<Question> {
         return listOf(
             Question(

@@ -1,6 +1,8 @@
 package uz.texnopos.a4pics1wordandroid4
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -21,6 +23,7 @@ import kotlin.random.Random
 class GameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGameBinding
     private lateinit var questions: List<Question>
+    private lateinit var prefs: SharedPreferences
     private var currentQuestionId = -1
     private var clickedImageId = -1
     private val optionLetters = mutableListOf<TextView>()
@@ -42,6 +45,7 @@ class GameActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         questions = Constants.getQuestions()
+        prefs = getSharedPreferences(Constants.PREFS, Context.MODE_PRIVATE)
 
         binding.apply {
             optionLetters.addAll(
@@ -59,8 +63,6 @@ class GameActivity : AppCompatActivity() {
             )
         }
 
-
-
         optionLetters.forEach { optionTV ->
             optionTV.addTextChangedListener {
                 val letter = it.toString()
@@ -75,7 +77,7 @@ class GameActivity : AppCompatActivity() {
             }
         }
 
-        currentQuestionId++
+        currentQuestionId = prefs.getInt(Constants.LEVEL, 0)
         setQuestion()
 
         binding.apply {
@@ -103,6 +105,13 @@ class GameActivity : AppCompatActivity() {
 
             btnNext.setOnClickListener {
                 currentQuestionId++
+
+                if (currentQuestionId == questions.size) {
+                    var cycle = prefs.getInt(Constants.CYCLE, 0)
+                    cycle++
+                    prefs.edit().putInt(Constants.CYCLE, cycle).apply()
+                    currentQuestionId -= questions.size
+                }
                 setQuestion()
             }
 
@@ -158,12 +167,15 @@ class GameActivity : AppCompatActivity() {
     private fun setQuestion() {
         val currentQuestion = questions[currentQuestionId]
 
+        prefs.edit().putInt(Constants.LEVEL, currentQuestionId).apply()
+
         binding.apply {
             currentAnswers.clear()
             updateAnswer(currentQuestion)
             showContinue(false)
 
-            tvLevel.text = (currentQuestionId + 1).toString()
+            val cycle = prefs.getInt(Constants.CYCLE, 0)
+            tvLevel.text = (cycle * questions.size + currentQuestionId + 1).toString()
 
             ivPic1.setImageResource(currentQuestion.images[0])
             ivPic2.setImageResource(currentQuestion.images[1])
